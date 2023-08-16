@@ -70,3 +70,13 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "devise", "~> 4.9"
+
+gem "annotate", "~> 3.2"
+
+gem "tailwindcss-rails", "~> 2.0"
+
+gem "pagy", "~> 6.0"
+
+gem "pundit", "~> 2.3"
