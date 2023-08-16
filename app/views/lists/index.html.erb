@@ -1,1 +1,9 @@
 <h1>List Page</h1>
+
+<%= turbo_stream_from "user_#{current_user.id}_lists" %>
+
+<section class="p-3 m-3 bg-slate-300">
+  <% @lists.each do |list| %>
+    <%= render partial: "lists/list", locals: { list: list } %>
+  <% end %>
+</section>

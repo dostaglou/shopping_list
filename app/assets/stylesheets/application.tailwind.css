@@ -4,14 +4,14 @@
 
 @layer components {
   body {
-    @apply text-slate-200;
-    @apply bg-slate-800
+    @apply text-slate-800;
+    @apply bg-slate-200
   }
   .btn {
     @apply mt-3 rounded-lg py-1 px-5 inline-block font-medium cursor-pointer;
   }
   .btn.btn-primary {
-    @apply bg-lime-400 text-slate-800 hover:bg-lime-600 text-slate-950
+    @apply bg-lime-400 text-slate-200 hover:bg-lime-600 text-slate-100
   }
   .btn.btn-warning {
     @apply bg-orange-400 hover:bg-orange-600
@@ -20,7 +20,7 @@
     @apply bg-red-500 hover:bg-red-700
   }
   .btn.btn-disabled {
-    @apply bg-slate-400 text-slate-800
+    @apply bg-slate-400 text-slate-200
   }
   .bg-primary {
     @apply bg-slate-200

@@ -80,3 +80,5 @@ gem "tailwindcss-rails", "~> 2.0"
 gem "pagy", "~> 6.0"
 
 gem "pundit", "~> 2.3"
+
+# gem "font-awesome-sass", "~> 6.4"
