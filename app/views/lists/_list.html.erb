@@ -1,6 +1,10 @@
-<div>
-  List Info
-  <%= icon('fa-brands', 'font-awesome')%>
-  <%= icon('fa-solid', 'user-secret')%>
-  <%= icon('fa-regular', 'bell')%>
+<% 5.times do  %>
+<div class="bg-slate-100 rounded-3xl p-4 mt-6 grid grid-cols-11 border-slate-800 border-2 border-b-4 shadow-lg shadow-slate-400 hover:border-lime-500">
+  <span class="col-span-6">Name</span>
+  <span class="text-center col-span-2">4/12 items</span>
+  <span class="text-center col-span-1 hover:text-lime-600"><i class="fa-solid fa-pen-to-square"></i></span>
+  <span class="text-center col-span-1 hover:text-lime-600"><i class="fa-regular fa-eye"></i></span>
+  <span class="text-center col-span-1 hover:text-lime-600"><i class="fa-regular fa-square-check"></i></span>
 </div>
+<% end %>
+
