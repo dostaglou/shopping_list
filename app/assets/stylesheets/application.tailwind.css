@@ -2,12 +2,107 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-
 @layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
+  body {
+    @apply text-slate-200;
+    @apply bg-slate-800
+  }
+  .btn {
+    @apply mt-3 rounded-lg py-1 px-5 inline-block font-medium cursor-pointer;
+  }
+  .btn.btn-primary {
+    @apply bg-lime-400 text-slate-800 hover:bg-lime-600 text-slate-950
+  }
+  .btn.btn-warning {
+    @apply bg-orange-400 hover:bg-orange-600
+  }
+  .btn.btn-critical {
+    @apply bg-red-500 hover:bg-red-700
+  }
+  .btn.btn-disabled {
+    @apply bg-slate-400 text-slate-800
+  }
+  .bg-primary {
+    @apply bg-slate-200
+  }
+  .bg-dark {
+    @apply bg-slate-800
+  }
+  .error-flash {
+    @apply text-center bg-red-700 max-w-md mx-auto my-2 rounded-lg
+  }
+  .dialog {
+    @apply backdrop:bg-slate-200 backdrop:bg-opacity-30
   }
 }
 
-*/
+.pagy-nav { @apply justify-center }
+.pagy-nav,
+.pagy-nav-js {
+  @apply flex space-x-2;
+}
+
+.pagy-nav .page a,
+.pagy-nav .page.active,
+.pagy-nav .page.prev.disabled,
+.pagy-nav .page.next.disabled,
+.pagy-nav-js .page a,
+.pagy-nav-js .page.active,
+.pagy-nav-js .page.prev.disabled,
+.pagy-nav-js .page.next.disabled {
+  @apply block rounded-lg px-3 py-1 text-sm text-gray-500 font-semibold bg-gray-200 shadow-md;
+  &:hover{
+    @apply bg-gray-300;
+  }
+  &:active{
+    @apply bg-gray-400 text-white;
+  }
+}
+
+.pagy-nav .page.prev.disabled,
+.pagy-nav .page.next.disabled,
+.pagy-nav-js .page.prev.disabled,
+.pagy-nav-js .page.next.disabled {
+  @apply text-gray-400 cursor-default;
+  &:hover {
+    @apply text-gray-400 bg-gray-200;
+  }
+  &:active {
+    @apply text-gray-400 bg-gray-200;
+  }
+}
+
+.pagy-nav .page.active,
+.pagy-nav-js .page.active {
+  @apply text-white cursor-default bg-gray-400;
+  &:hover {
+    @apply text-white bg-gray-400;
+  }
+  &:active {
+    @apply bg-gray-400 text-white;
+  }
+}
+
+
+.pagy-combo-nav-js {
+  @apply flex max-w-max rounded-full px-3 py-1 text-sm text-gray-500 font-semibold bg-gray-200 shadow-md;
+}
+
+.pagy-combo-nav-js .pagy-combo-input {
+  @apply bg-white px-2 rounded-sm
+}
+
+.pagy-combo-nav-js .page.prev,
+.pagy-combo-nav-js .page.next {
+  &:hover {
+    @apply text-gray-800;
+  }
+  &:active {
+    @apply text-gray-800;
+  }
+}
+
+.pagy-combo-nav-js .page.prev.disabled,
+.pagy-combo-nav-js .page.next.disabled {
+  @apply text-gray-400 cursor-default;
+}
