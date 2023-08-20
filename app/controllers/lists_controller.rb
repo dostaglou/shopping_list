@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:edit, :update, :show, :destroy]
+  before_action :set_list, only: [:edit, :update, :show, :destroy, :update_position]
 
   def index
     records = policy_scope(List)
@@ -48,6 +48,11 @@ class ListsController < ApplicationController
     end
   end
 
+  def update_position
+    @list.insert_at(params[:position].to_i)
+
+    head :no_content
+  end
 
   private
     def set_list
@@ -55,6 +60,6 @@ class ListsController < ApplicationController
     end
 
     def list_params
-      params.require(:list).permit(:title)
+      params.require(:list).permit(:title, :position)
     end
 end

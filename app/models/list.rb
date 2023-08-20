@@ -18,6 +18,8 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class List < ApplicationRecord
+  acts_as_list(top_of_list: 0, add_new_at: :top)
+
   after_create_commit :broadcast_creation
   after_update_commit :broadcast_update
   after_destroy_commit :broadcast_destroy
@@ -27,8 +29,8 @@ class List < ApplicationRecord
   validates :user_id, presence: true
   validates :title, length: { in: 4..20 }, presence: true, uniqueness: { scope: :user_id}
 
-
   private
+
     def broadcast_creation
       broadcast_prepend_to "user_#{self.user_id}_lists", partial: "lists/list", locals: { list: self }, target: "user_#{self.user_id}_lists"
     end

@@ -1,8 +1,8 @@
-<%= turbo_frame_tag list do  %>
-  <% if list.id.even? %>
+<%= turbo_frame_tag list, data: { sortable_id: list.id} do  %>
+  <div data-sortable-id="<%= list.id %>">
     <div class="bg-slate-100 rounded-3xl p-4 mt-6 grid grid-cols-12 border-slate-800 border-2 border-b-4 shadow-lg shadow-slate-400 hover:border-lime-500">
-      <span class=col-span-1><i class="fa-solid fa-bars"></i></span>
-      <span class="col-span-8"><%= list.title %></span>
+      <span class="col-span-1"><i class="fa-solid fa-bars" data-sortable-handle=""></i></span>
+      <span class="col-span-8"><%= list.title + " -- #{list.id}" %></span>
       <%= link_to edit_list_path(list.id), data: { turbo_frame: "edit_list" }, class: "text-center col-span-1 hover:text-lime-600" do  %>
         <span class=""><i class="fa-solid fa-pen-to-square"></i></span>
       <% end %>
@@ -50,14 +50,6 @@
       <span class="my-auto text-center col-span-3">1 bag</span>
       <span class="my-auto text-center col-span-1"><i class="text-emerald-400 fa-regular fa-square-check"></i></span>
     </div>
-
-  <% else  %>
-    <div class="bg-slate-100 rounded-3xl p-4 mt-6 grid grid-cols-12 border-slate-800 border-2 border-b-4 shadow-lg shadow-slate-400 hover:border-lime-500">
-      <span class=col-span-1><i class="fa-solid fa-bars"></i></span>
-      <span class="col-span-8"><%= list.title %></span>
-      <span class="text-center col-span-1 hover:text-lime-600"><i class="fa-solid fa-pen-to-square"></i></span>
-      <span class="text-center col-span-2">4/12</span>
-    </div>
-  <% end %>
+  </div>
 <% end %>
 
