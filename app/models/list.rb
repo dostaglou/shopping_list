@@ -3,6 +3,7 @@
 # Table name: lists
 #
 #  id         :bigint           not null, primary key
+#  position   :integer          default(0), not null
 #  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -17,4 +18,16 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class List < ApplicationRecord
+  after_create_commit :broadcast_creation
+
+  belongs_to :user
+
+  validates :user_id, presence: true
+  validates :title, length: { in: 4..20 }, presence: true, uniqueness: { scope: :user_id}
+
+
+  private
+    def broadcast_creation
+      broadcast_prepend_to "user_#{self.user_id}_lists", partial: "lists/list", locals: { list: self }, target: "user_#{self.user_id}_lists"
+    end
 end

@@ -1,9 +1,11 @@
-<h1>List Page</h1>
-
 <%= turbo_stream_from "user_#{current_user.id}_lists" %>
+<%= turbo_frame_tag "new_list" %>
 
 <section class="p-3 m-3">
-  <% @lists.each do |list| %>
-    <%= render partial: "lists/list", locals: { list: list } %>
+  <%= link_to "New", new_list_path, data: { turbo_frame: "new_list" } %>
+    <%= turbo_frame_tag "user_#{current_user.id}_lists" do %>
+    <% @lists.each do |list| %>
+      <%= render partial: "lists/list", locals: { list: list } %>
+    <% end %>
   <% end %>
 </section>

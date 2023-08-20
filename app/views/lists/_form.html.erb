@@ -1,0 +1,23 @@
+<%= form_with(model: list) do |form| %>
+  <div class="bg-slate-100 w-96 rounded-3xl p-4 grid grid-cols-12 grid-rows-2 border-slate-800 border-2 border-b-4 shadow-lg shadow-slate-400 hover:border-lime-500">
+    <div class="col-span-12">
+      <% if list.errors.any? { |er| er.attribute == :title } %>
+        <%  %>
+        <span class="text-center m-auto critical-bg"><%=  %><span>
+      <% end %>
+      <%= form.text_field :title, placeholder: "Name", class: "w-full" %>
+    </div>
+
+    <div class="mt-2 col-span-12 flex justify-around">
+      <div data-action="click->dialog#close" class="text-center w-2/5 leading-8 align-middle my-0 ml-1 btn btn-warning">Cancel</div>
+      <button class="text-center w-2/5 my-0 ml-1 btn btn-primary">Submit</button>
+    </div>
+  </div>
+  <% if list.errors.any? %>
+    <div class="critical-bg text-center">
+    <% list.errors.each do |err| %>
+      <span class="text-center m-auto"><%= err.message %></span>
+    <% end %>
+    </div>
+  <% end %>
+<% end %>

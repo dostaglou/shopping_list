@@ -5,13 +5,13 @@
 @layer components {
   body {
     @apply text-slate-800;
-    @apply bg-slate-200
+    @apply bg-slate-50;
   }
   .btn {
     @apply mt-3 rounded-lg py-1 px-5 inline-block font-medium cursor-pointer;
   }
   .btn.btn-primary {
-    @apply bg-lime-400 text-slate-200 hover:bg-lime-600 text-slate-100
+    @apply bg-lime-200 text-slate-800 hover:bg-lime-400 hover:text-slate-100
   }
   .btn.btn-warning {
     @apply bg-orange-400 hover:bg-orange-600
@@ -28,11 +28,14 @@
   .bg-dark {
     @apply bg-slate-800
   }
+  .critical-bg {
+    @apply bg-red-500
+  }
   .error-flash {
-    @apply text-center bg-red-700 max-w-md mx-auto my-2 rounded-lg
+    @apply text-center bg-red-500 max-w-md mx-auto my-2 rounded-lg
   }
   .dialog {
-    @apply backdrop:bg-slate-200 backdrop:bg-opacity-30
+    @apply backdrop:bg-slate-100 backdrop:opacity-90
   }
 }
 

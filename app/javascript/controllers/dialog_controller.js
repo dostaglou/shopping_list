@@ -6,6 +6,11 @@ export default class extends Controller {
 
   connect() {
     this.dialogTarget.showModal()
+    this.element.addEventListener("turbo:submit-end", (event) => {
+      if (event.detail.success) {
+        this.close()
+      }
+    })
   }
 
   open() {

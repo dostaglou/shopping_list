@@ -17,6 +17,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_135616) do
   create_table "lists", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "title", null: false
+    t.integer "position", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_lists_on_user_id"
