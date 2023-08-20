@@ -9,8 +9,16 @@
     </div>
 
     <div class="mt-2 col-span-12 flex justify-around">
-      <div data-action="click->dialog#close" class="text-center w-2/5 leading-8 align-middle my-0 ml-1 btn btn-warning">Cancel</div>
-      <button class="text-center w-2/5 my-0 ml-1 btn btn-primary">Submit</button>
+      <% if list.id %>
+        <%= link_to "Delete", list_path(list),
+          class: "text-center grow leading-8 align-middle my-0 ml-1 btn btn-warning",
+          type: "button",
+          data: { turbo_method: :delete, action: "click->dialog#close" },
+          method: :delete
+        %>
+      <% end %>
+      <div data-action="click->dialog#close" class="text-center grow leading-8 align-middle my-0 ml-1 btn btn-warning">Cancel</div>
+      <button class="text-center grow my-0 ml-1 btn btn-primary">Submit</button>
     </div>
   </div>
   <% if list.errors.any? %>

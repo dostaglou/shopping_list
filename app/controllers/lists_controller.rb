@@ -37,6 +37,17 @@ class ListsController < ApplicationController
     end
   end
 
+  def destroy
+    if @list.destroy
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to lists_path }
+      end
+    else
+      redirect_to lists_path
+    end
+  end
+
 
   private
     def set_list

@@ -20,6 +20,7 @@
 class List < ApplicationRecord
   after_create_commit :broadcast_creation
   after_update_commit :broadcast_update
+  after_destroy_commit :broadcast_destroy
 
   belongs_to :user
 
@@ -34,5 +35,9 @@ class List < ApplicationRecord
 
     def broadcast_update
       broadcast_replace_to "user_#{self.user_id}_lists", partial: "lists/list", locals: { list: self }, target: self
+    end
+
+    def broadcast_destroy
+      broadcast_remove_to "user_#{self.user_id}_lists", target: self
     end
 end
