@@ -6,8 +6,8 @@
       <%= link_to edit_list_path(list.id), data: { turbo_frame: "edit_list" }, class: "text-center col-span-1 hover:text-lime-600" do  %>
         <span class=""><i class="fa-solid fa-pen-to-square"></i></span>
       <% end %>
-      <span data-slide-target="showButton" data-action="click->slide#show" class="text-center col-span-2">4/12 <i class="text-lime-400 fa-solid fa-eye"></i></span>
-      <span data-slide-target="hideButton" data-action="click->slide#hide" class="hidden text-center col-span-2">4/12 <i class="text-red-400 fa-solid fa-eye-slash"></i></span>
+      <span data-slide-target="showButton" data-action="click->slide#show" class="text-center col-span-2"><%= "#{list.items.pending.count}/#{list.items.count}" %> <i class="text-lime-400 fa-solid fa-eye"></i></span>
+      <span data-slide-target="hideButton" data-action="click->slide#hide" class="hidden text-center col-span-2"><%= "#{list.items.pending.count}/#{list.items.count}" %> <i class="text-red-400 fa-solid fa-eye-slash"></i></span>
     </div>
     <div data-slide-target="container" class="hidden h-0">
       <div data-slide-target="section" data-transition-enter="ease-in-out duration-300" data-transition-enter-start="h-0 opacity-0" data-transition-enter-end="h-32 opacity-100" data-transition-leave="ease-in-out duration-1000" data-transition-leave-start="h-32 opacity-100" data-transition-leave-end="h-0 opacity-0">

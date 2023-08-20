@@ -1,7 +1,7 @@
 <%= turbo_frame_tag "item_#{item.id}" do %>
   <%
-    pending_class = %w(bg-gradient-to-r from-slate-100 via-slate-100 to-pink-200)
-    retrieved_class = %w(bg-gradient-to-r from-slate-100 via-slate-100 to-emerald-100)
+    pending_class = %w(bg-gradient-to-r from-slate-100 from-50% to-pink-200)
+    retrieved_class = %w(bg-gradient-to-r from-slate-100 from-50% to-emerald-100)
     card_color = item.pending? ? pending_class.join(" ") : retrieved_class.join(" ")
   %>
 

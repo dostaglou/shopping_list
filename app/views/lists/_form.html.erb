@@ -1,8 +1,9 @@
 <%= form_with(model: list) do |form| %>
-  <div class="bg-slate-100 w-96 rounded-3xl p-4 grid grid-cols-12 grid-rows-2 border-slate-800 border-2 border-b-4 shadow-lg shadow-slate-400 hover:border-lime-500">
+  <% has_error = list.errors.any? %>
+  <div class="<%= has_error.present? ? "rounded-t-3xl" : "rounded-3xl" %> bg-slate-100 w-96 p-4 grid grid-cols-12 grid-rows-2 border-slate-800 border-2 border-b-4 shadow-lg shadow-slate-400 hover:border-lime-500">
     <div class="col-span-12">
       <% if list.errors.any? { |er| er.attribute == :title } %>
-        <%  %>
+        <%= list.errors.filter_map { |er| er.message if er.attribute == :title }.join(", ") %>
         <span class="text-center m-auto critical-bg"><%=  %><span>
       <% end %>
       <%= form.text_field :title, placeholder: "Name", class: "w-full" %>
@@ -23,9 +24,9 @@
   </div>
   <% if list.errors.any? %>
     <div class="critical-bg text-center">
-    <% list.errors.each do |err| %>
-      <span class="text-center m-auto"><%= err.message %></span>
-    <% end %>
+      <% list.errors.each do |err| %>
+        <span class="text-center m-auto"><%= err.message %></span>
+      <% end %>
     </div>
   <% end %>
 <% end %>

@@ -6,9 +6,9 @@
         <span class="text-center m-auto critical-bg"><%=  %><span>
       <% end %>
       <div class="flex items-end my-2">
-        <%= form.text_field :name, placeholder: "Name", class: "border-transparent border-b-2 border-slate-400" %>
+        <%= form.text_field :name, placeholder: "Name", class: "border-transparent border-b-2 border-slate-400", required: true,  %>
         <span class="px-2">Qty:</span>
-        <%= form.number_field :quantity, in: (1..100), step: 1, class: "border-transparent border-b-2 border-slate-400" %>
+        <%= form.number_field :quantity, value: 1, in: (1..100), step: 1, class: "border-transparent border-b-2 border-slate-400" %>
       </div>
       <%= form.text_field :note, placeholder: "Note", class: "w-full border-transparent border-b-2 border-slate-400" %>
     </div>

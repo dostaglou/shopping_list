@@ -5,14 +5,16 @@
 <%= turbo_frame_tag "edit_item" %>
 
 <section class="p-3 m-3">
-  <%= link_to "New", new_list_path, data: { turbo_frame: "new_list" } %>
-    <%= turbo_frame_tag "user_#{current_user.id}_lists" do %>
-
+  <div class="flex justify-center text-center">
+    <%= link_to "Invite", new_list_path, data: { turbo_frame: "new_list" }, class: "btn btn-primary grow mx-3" %>
+    <p class="grow mx-3"><%= "#{@total_pending_items} pending / #{@total_items} total" %></p>
+    <%= link_to "New", new_list_path, data: { turbo_frame: "new_list" }, class: "btn btn-primary grow mx-3" %>
+  </div>
+  <%= turbo_frame_tag "user_#{current_user.id}_lists" do %>
     <div data-controller="sortable" data-sortable-url-value="<%= list_update_position_path(id: ":id") %>">
       <% @lists.each do |list| %>
         <%= render partial: "lists/list", locals: { list: list } %>
       <% end %>
     </div>
   <% end %>
-
 </section>

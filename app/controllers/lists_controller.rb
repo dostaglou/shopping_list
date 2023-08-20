@@ -3,6 +3,8 @@ class ListsController < ApplicationController
 
   def index
     records = policy_scope(List)
+    @total_items = Item.where(list_id: records.pluck(:id)).count
+    @total_pending_items = Item.pending.where(list_id: records.pluck(:id)).count
     @pagy, @lists = pagy(records, items: 6)
     @lists
   end

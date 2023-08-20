@@ -17,6 +17,9 @@ class Item < ApplicationRecord
   default_scope { order(status: :asc) }
   scope :by_status, ->(direction = :asc) { order(status: direction, name: :asc) }
 
+  validates :name, length: { in: 3..20 }, presence: true, uniqueness: { scope: :user_id, case_sensitive: false }
+
+
   private
 
     def broadcast_creation
