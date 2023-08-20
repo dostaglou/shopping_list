@@ -27,7 +27,7 @@ class List < ApplicationRecord
   belongs_to :user
 
   validates :user_id, presence: true
-  validates :title, length: { in: 4..20 }, presence: true, uniqueness: { scope: :user_id}
+  validates :title, length: { in: 3..20 }, presence: true, uniqueness: { scope: :user_id}
 
   private
 
