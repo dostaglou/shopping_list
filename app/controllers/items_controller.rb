@@ -27,6 +27,19 @@ class ItemsController < ApplicationController
   def update
   end
 
+  def update_status
+    item = Item.find(params[:id])
+
+    if item.update(status: params[:status].to_i)
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to lists_path }
+      end
+    else
+      redirect_to lists_path
+    end
+  end
+
   def destroy
     item = Item.find(params[:id])
     if item.destroy

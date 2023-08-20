@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :items, only: [:destroy]
 
+  post '/items/:id/update_status', to: "items#update_status", as: "item_update_status"
   put '/lists/:id/update_position', to: 'lists#update_position', as: 'list_update_position'
 
   root "lists#index"

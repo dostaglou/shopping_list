@@ -25,7 +25,7 @@ class Item < ApplicationRecord
     end
 
     def broadcast_update
-      broadcast_replace_to "user_#{self.list.user_id}_lists", partial: "items/item", locals: { item: self }, target: self
+      broadcast_replace_to "user_#{self.list.user_id}_lists", partial: "items/item", locals: { item: self }, target: "item_#{self.id}"
     end
 
     def broadcast_destroy
