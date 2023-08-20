@@ -1,5 +1,6 @@
 <%= turbo_stream_from "user_#{current_user.id}_lists" %>
 <%= turbo_frame_tag "new_list" %>
+<%= turbo_frame_tag "edit_list" %>
 
 <section class="p-3 m-3">
   <%= link_to "New", new_list_path, data: { turbo_frame: "new_list" } %>

@@ -19,6 +19,7 @@
 #
 class List < ApplicationRecord
   after_create_commit :broadcast_creation
+  after_update_commit :broadcast_update
 
   belongs_to :user
 
@@ -29,5 +30,9 @@ class List < ApplicationRecord
   private
     def broadcast_creation
       broadcast_prepend_to "user_#{self.user_id}_lists", partial: "lists/list", locals: { list: self }, target: "user_#{self.user_id}_lists"
+    end
+
+    def broadcast_update
+      broadcast_replace_to "user_#{self.user_id}_lists", partial: "lists/list", locals: { list: self }, target: self
     end
 end

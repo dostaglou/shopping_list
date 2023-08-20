@@ -1,4 +1,6 @@
 class ListsController < ApplicationController
+  before_action :set_list, only: [:edit, :update, :show, :destroy]
+
   def index
     records = policy_scope(List)
     @pagy, @lists = pagy(records, items: 6)
@@ -7,6 +9,20 @@ class ListsController < ApplicationController
 
   def new
     @list ||= List.new
+  end
+
+  def edit
+  end
+
+  def update
+    if @list.update(list_params)
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to lists_path }
+      end
+    else
+      render :edit
+    end
   end
 
   def create
@@ -24,7 +40,7 @@ class ListsController < ApplicationController
 
   private
     def set_list
-
+      @list = current_user.lists.find(params[:id])
     end
 
     def list_params
