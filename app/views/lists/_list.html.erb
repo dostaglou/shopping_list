@@ -12,47 +12,16 @@
     <div data-slide-target="container" class="hidden h-0">
       <div data-slide-target="section" data-transition-enter="ease-in-out duration-300" data-transition-enter-start="h-0 opacity-0" data-transition-enter-end="h-32 opacity-100" data-transition-leave="ease-in-out duration-1000" data-transition-leave-start="h-32 opacity-100" data-transition-leave-end="h-0 opacity-0">
         <div class="mr-6 text-right" data-slide-target="content" data-transition-enter="ease-in-out duration-1000" data-transition-enter-start="opacity-0" data-transition-enter-end="opacity-100" data-transition-leave="ease-in-out duration-300" data-transition-leave-start="opacity-100" data-transition-leave-end="opacity-0">
-          <button class="btn btn-primary mt-0 rounded-t-none">New</button>
-          <button class="btn border-2 bg-slate-100 mt-0 rounded-t-none"><i class="fa-solid fa-arrow-down-a-z"></i></button>
-          <button class="bg-gradient-to-r from-pink-100 to-emerald-100 btn btn-primary mt-0 rounded-t-none"><i class="text-pink-400 fa-regular fa-square"></i><b class="text-black"> -> </b><i class="text-emerald-400 fa-regular fa-square-check"></i></button>
-          <button class="btn bg-pink-100 mt-0 rounded-t-none"><i class="text-pink-400 fa-regular fa-square"></i> <i class="fa-solid fa-arrow-down-short-wide"></i></button>
+          <%= link_to "New Item", new_list_item_path(list_id: list.id), data: { turbo_frame: "new_item" }, class: "btn btn-primary mt-0 rounded-t-none" %>
+          <button class="hover:bg-slate-200 bg-slate-100 mt-0 rounded-t-none btn"><i class="fa-solid fa-arrow-down-a-z"></i></button>
+          <button class="hover:from-pink-200 hover:to-emerald-200 bg-gradient-to-r from-pink-100 to-emerald-100 btn btn-primary mt-0 rounded-t-none"><i class="text-pink-400 fa-regular fa-square"></i><b class="text-black"> -> </b><i class="text-emerald-400 fa-regular fa-square-check"></i></button>
+          <button class="hover:bg-pink-200 bg-pink-100 mt-0 rounded-t-none btn"><i class="text-pink-400 fa-regular fa-square"></i> <i class="fa-solid fa-arrow-down-short-wide"></i></button>
         </div>
-        <div data-slide-target="content" data-transition-enter="ease-in-out duration-1000" data-transition-enter-start="opacity-0" data-transition-enter-end="opacity-100" data-transition-leave="ease-in-out duration-300" data-transition-leave-start="opacity-100" data-transition-leave-end="opacity-0" class="bg-gradient-to-r from-slate-100 via-slate-100 to-pink-200 rounded-3xl p-1 mt-1 ml-6 grid grid-cols-12 border-slate-800 border-2 shadow-lg shadow-slate-400 hover:border-lime-500">
-          <span class="col-span-1 my-auto"></span>
-          <span class="col-span-7"><b>Onions</b></span>
-          <span class="my-auto text-center col-span-3"><b>3</b></span>
-          <span class="my-auto text-center col-span-1"><i class="text-pink-400 fa-regular fa-square"></i></span>
-        </div>
-        <div data-slide-target="content" data-transition-enter="ease-in-out duration-1000" data-transition-enter-start="opacity-0" data-transition-enter-end="opacity-100" data-transition-leave="ease-in-out duration-300" data-transition-leave-start="opacity-100" data-transition-leave-end="opacity-0" class="bg-gradient-to-r from-slate-100 via-slate-100 to-emerald-100 rounded-2xl p-1 mt-1 ml-6 grid grid-cols-12 border-slate-800 border-2 shadow-lg shadow-slate-400 hover:border-lime-500">
-          <span class="col-span-1 my-auto"></span>
-          <span class="col-span-7">Potatoes</span>
-          <span class="my-auto text-center col-span-3">1 bag</span>
-          <span class="my-auto text-center col-span-1"><i class="text-emerald-400 fa-regular fa-square-check"></i></span>
-        </div>
-        <div data-slide-target="content" data-transition-enter="ease-in-out duration-1000" data-transition-enter-start="opacity-0" data-transition-enter-end="opacity-100" data-transition-leave="ease-in-out duration-300" data-transition-leave-start="opacity-100" data-transition-leave-end="opacity-0" class="bg-gradient-to-r from-slate-100 via-slate-100 to-pink-200 rounded-3xl p-1 mt-1 ml-6 grid grid-cols-12 border-slate-800 border-2 shadow-lg shadow-slate-400 hover:border-lime-500">
-          <span class="col-span-1 my-auto"></span>
-          <span class="col-span-7"><b>Onions</b></span>
-          <span class="my-auto text-center col-span-3"><b>3</b></span>
-          <span class="my-auto text-center col-span-1"><i class="text-pink-400 fa-regular fa-square"></i></span>
-        </div>
-        <div data-slide-target="content" data-transition-enter="ease-in-out duration-1000" data-transition-enter-start="opacity-0" data-transition-enter-end="opacity-100" data-transition-leave="ease-in-out duration-300" data-transition-leave-start="opacity-100" data-transition-leave-end="opacity-0" class="bg-gradient-to-r from-slate-100 via-slate-100 to-emerald-100 rounded-2xl p-1 mt-1 ml-6 grid grid-cols-12 border-slate-800 border-2 shadow-lg shadow-slate-400 hover:border-lime-500">
-          <span class="col-span-1 my-auto"></span>
-          <span class="col-span-7">Potatoes</span>
-          <span class="my-auto text-center col-span-3">1 bag</span>
-          <span class="my-auto text-center col-span-1"><i class="text-emerald-400 fa-regular fa-square-check"></i></span>
-        </div>
-        <div data-slide-target="content" data-transition-enter="ease-in-out duration-1000" data-transition-enter-start="opacity-0" data-transition-enter-end="opacity-100" data-transition-leave="ease-in-out duration-300" data-transition-leave-start="opacity-100" data-transition-leave-end="opacity-0" class="bg-gradient-to-r from-slate-100 via-slate-100 to-pink-200 rounded-3xl p-1 mt-1 ml-6 grid grid-cols-12 border-slate-800 border-2 shadow-lg shadow-slate-400 hover:border-lime-500">
-          <span class="col-span-1 my-auto"></span>
-          <span class="col-span-7"><b>Onions</b></span>
-          <span class="my-auto text-center col-span-3"><b>3</b></span>
-          <span class="my-auto text-center col-span-1"><i class="text-pink-400 fa-regular fa-square"></i></span>
-        </div>
-        <div data-slide-target="content" data-transition-enter="ease-in-out duration-1000" data-transition-enter-start="opacity-0" data-transition-enter-end="opacity-100" data-transition-leave="ease-in-out duration-300" data-transition-leave-start="opacity-100" data-transition-leave-end="opacity-0" class="bg-gradient-to-r from-slate-100 via-slate-100 to-emerald-100 rounded-2xl p-1 mt-1 ml-6 grid grid-cols-12 border-slate-800 border-2 shadow-lg shadow-slate-400 hover:border-lime-500">
-          <span class="col-span-1 my-auto"></span>
-          <span class="col-span-7">Potatoes</span>
-          <span class="my-auto text-center col-span-3">1 bag</span>
-          <span class="my-auto text-center col-span-1"><i class="text-emerald-400 fa-regular fa-square-check"></i></span>
-        </div>
+
+        <%= turbo_frame_tag "#{list.id}_top_item" %>
+        <% list.items.each do |item| %>
+          <%= render partial: "items/item", locals: { item: item } %>
+        <% end %>
       </div>
     </div>
   </div>

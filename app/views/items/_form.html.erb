@@ -1,0 +1,36 @@
+<%= form_with(model: [list, item]) do |form| %>
+  <div class="bg-slate-100 w-96 rounded-3xl p-4 border-slate-800 border-2 border-b-4 shadow-lg shadow-slate-400 hover:border-lime-500">
+    <div class="">
+      <% if item.errors.any? { |er| er.attribute == :title } %>
+        <%  %>
+        <span class="text-center m-auto critical-bg"><%=  %><span>
+      <% end %>
+      <div class="flex items-end my-2">
+        <%= form.text_field :name, placeholder: "Name", class: "border-transparent border-b-2 border-slate-400" %>
+        <span class="px-2">Qty:</span>
+        <%= form.number_field :quantity, in: (1..100), step: 1, class: "border-transparent border-b-2 border-slate-400" %>
+      </div>
+      <%= form.text_field :note, placeholder: "Note", class: "w-full border-transparent border-b-2 border-slate-400" %>
+    </div>
+
+    <div class="mt-2 flex justify-around">
+      <% if item.id %>
+        <%= link_to "Delete", list_items_path(item),
+          class: "text-center grow leading-8 align-middle my-0 ml-1 btn btn-warning",
+          type: "button",
+          data: { turbo_method: :delete, action: "click->dialog#close" },
+          method: :delete
+        %>
+      <% end %>
+      <div data-action="click->dialog#close" class="text-center grow leading-8 align-middle my-0 ml-1 btn btn-warning">Cancel</div>
+      <button class="text-center grow my-0 ml-1 btn btn-primary">Submit</button>
+    </div>
+  </div>
+  <% if item.errors.any? %>
+    <div class="critical-bg text-center">
+    <% item.errors.each do |err| %>
+      <span class="text-center m-auto"><%= err.message %></span>
+    <% end %>
+    </div>
+  <% end %>
+<% end %>

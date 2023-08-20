@@ -25,6 +25,7 @@ class List < ApplicationRecord
   after_destroy_commit :broadcast_destroy
 
   belongs_to :user
+  has_many :items, dependent: :destroy
 
   validates :user_id, presence: true
   validates :title, length: { in: 3..20 }, presence: true, uniqueness: { scope: :user_id}
@@ -32,7 +33,7 @@ class List < ApplicationRecord
   private
 
     def broadcast_creation
-      broadcast_prepend_to "user_#{self.user_id}_lists", partial: "lists/list", locals: { list: self }, target: "user_#{self.user_id}_lists"
+      broadcast_prepend_to "user_#{self.user_id}_lists", partial: "lists/list", locals: { list: self }, target: self.list
     end
 
     def broadcast_update
