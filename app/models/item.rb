@@ -14,11 +14,11 @@ class Item < ApplicationRecord
     pending: 0,
     retrieved: 1
   }
-  default_scope { order(status: :asc) }
+
   scope :by_status, ->(direction = :asc) { order(status: direction, name: :asc) }
+  scope :order_by, ->(order_hash = {}) { order(order_hash.merge(status: :asc)) }
 
-  validates :name, length: { in: 3..20 }, presence: true, uniqueness: { scope: :user_id, case_sensitive: false }
-
+  validates :name, length: { in: 3..20 }, presence: true, uniqueness: { scope: :list_id, case_sensitive: false }
 
   private
 

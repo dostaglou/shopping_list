@@ -13,7 +13,7 @@
   <%= turbo_frame_tag "user_#{current_user.id}_lists" do %>
     <div data-controller="sortable" data-sortable-url-value="<%= list_update_position_path(id: ":id") %>">
       <% @lists.each do |list| %>
-        <%= render partial: "lists/list", locals: { list: list } %>
+        <%= render partial: "lists/list", locals: { list: list, items: list.items.by_status } %>
       <% end %>
     </div>
   <% end %>

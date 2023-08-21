@@ -1,5 +1,5 @@
-<%= turbo_frame_tag list, data: { sortable_id: list.id} do  %>
-  <div data-sortable-id="<%= list.id %>" data-controller="slide">
+<%= turbo_frame_tag "list_#{list.id}", data: { sortable_id: list.id} do  %>
+  <div data-sortable-id="<%= list.id %>" data-controller="slide" data-slide-expanded-value="<%= (defined?(expanded) || false).to_s %>">
     <div data-sortable-handle="" class="bg-slate-100 rounded-3xl p-4 mt-6 grid grid-cols-12 border-slate-800 border-2 border-b-4 shadow-lg shadow-slate-400 hover:border-lime-500">
       <span class="col-span-1"><i class="fa-solid fa-bars"></i></span>
       <span class="col-span-8"><b><%= list.title %></b></span>
@@ -12,14 +12,20 @@
     <div data-slide-target="container" class="hidden h-0">
       <div data-slide-target="section" data-transition-enter="ease-in-out duration-300" data-transition-enter-start="h-0 opacity-0" data-transition-enter-end="h-32 opacity-100" data-transition-leave="ease-in-out duration-1000" data-transition-leave-start="h-32 opacity-100" data-transition-leave-end="h-0 opacity-0">
         <div class="mr-6 text-right" data-slide-target="content" data-transition-enter="ease-in-out duration-1000" data-transition-enter-start="opacity-0" data-transition-enter-end="opacity-100" data-transition-leave="ease-in-out duration-300" data-transition-leave-start="opacity-100" data-transition-leave-end="opacity-0">
-          <%= link_to "New Item", new_list_item_path(list_id: list.id), data: { turbo_frame: "new_item" }, class: "btn btn-primary mt-0 rounded-t-none" %>
-          <button class="hover:bg-slate-200 bg-slate-100 mt-0 rounded-t-none btn"><i class="fa-solid fa-arrow-down-a-z"></i></button>
-          <button class="hover:from-pink-200 hover:to-emerald-200 bg-gradient-to-r from-pink-100 to-emerald-100 btn btn-primary mt-0 rounded-t-none"><i class="text-pink-400 fa-regular fa-square"></i><b class="text-black"> -> </b><i class="text-emerald-400 fa-regular fa-square-check"></i></button>
-          <button class="hover:bg-pink-200 bg-pink-100 mt-0 rounded-t-none btn"><i class="text-pink-400 fa-regular fa-square"></i> <i class="fa-solid fa-arrow-down-short-wide"></i></button>
+          <%= link_to "New", new_list_item_path(list_id: list.id), data: { turbo_frame: "new_item" }, class: "btn btn-primary mt-0 rounded-t-none" %>
+          <%= link_to list_items_path(list_id: list.id, order: "a_to_z"), data: { turbo_stream: "list_#{list.id}"} do %>
+            <span class="hover:bg-slate-200 bg-slate-100 mt-0 rounded-t-none btn"><i class="fa-solid fa-arrow-down-a-z"></i></span>
+          <% end %>
+          <%= link_to list_items_path(list_id: list.id, order: "pending_to_retrieved"), data: { turbo_stream: "list_#{list.id}"} do %>
+            <span class="hover:from-pink-200 hover:to-emerald-200 bg-gradient-to-r from-pink-100 to-emerald-100 btn btn-primary mt-0 rounded-t-none"><i class="text-pink-400 fa-regular fa-square"></i><b class="text-black"> -> </b><i class="text-emerald-400 fa-regular fa-square-check"></i></span>
+          <% end %>
+          <%= link_to list_items_path(list_id: list.id, order: "pending_only"), data: { turbo_stream: "list_#{list.id}"} do %>
+            <span class="hover:bg-pink-200 bg-pink-100 mt-0 rounded-t-none btn"><i class="text-pink-400 fa-regular fa-square"></i> <i class="fa-solid fa-arrow-down-short-wide"></i></span>
+          <% end %>
         </div>
 
         <%= turbo_frame_tag "#{list.id}_top_item" %>
-        <% list.items.each do |item| %>
+        <% items.each do |item| %>
           <%= render partial: "items/item", locals: { item: item } %>
         <% end %>
       </div>

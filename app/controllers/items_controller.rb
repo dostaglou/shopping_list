@@ -1,7 +1,23 @@
 class ItemsController < ApplicationController
-  before_action :set_list, only: [:new, :create, :update, :index]
+  before_action :set_list, only: %i[index new create update index]
   before_action :update_list, only: [:delete]
+
   def index
+    items = case params[:order]
+            when "a_to_z" then @list.items.order_by({ name: :asc})
+            when "pending_to_retrieved" then @list.items.by_status
+            when "pending_only" then @list.items.by_status.pending
+            else @list.items.by_status
+            end
+
+    puts "\n\n\n#{items.pluck(:name)}\n\n\n"
+
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace("list_#{@list.id}", partial: "lists/list", locals: { list: @list, items: items, expanded: true })
+      end
+      format.html { redirect_to @list }
+    end
   end
 
   def new
