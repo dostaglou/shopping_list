@@ -33,11 +33,11 @@ class List < ApplicationRecord
   private
 
     def broadcast_creation
-      broadcast_prepend_to "user_#{self.user_id}_lists", partial: "lists/list", locals: { list: self }, target: self.list
+      broadcast_prepend_to "user_#{self.user_id}_lists", partial: "lists/list", locals: { list: self, items: [] }, target: "user_#{self.user_id}_lists"
     end
 
     def broadcast_update
-      broadcast_replace_to "user_#{self.user_id}_lists", partial: "lists/list", locals: { list: self }, target: self
+      broadcast_replace_to "user_#{self.user_id}_lists", partial: "lists/list", locals: { list: self, items: self.items.by_status }, target: self
     end
 
     def broadcast_destroy
