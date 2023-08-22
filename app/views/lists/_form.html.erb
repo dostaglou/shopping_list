@@ -1,6 +1,6 @@
 <%= form_with(model: list) do |form| %>
   <% has_error = list.errors.any? %>
-  <div class="<%= has_error.present? ? "rounded-t-3xl" : "rounded-3xl" %> bg-slate-100 w-80 p-4 grid grid-cols-12 grid-rows-2 border-slate-800 border-2 border-b-4 shadow-lg shadow-slate-400 hover:border-lime-500">
+  <div class="<%= has_error.present? ? "rounded-t-3xl" : "rounded-3xl" %> bg-slate-100 mb-96 w-80 p-4 grid grid-cols-12 grid-rows-2 border-slate-800 border-2 border-b-4 shadow-lg shadow-slate-400 hover:border-lime-500">
     <div class="col-span-12">
       <% if list.errors.any? { |er| er.attribute == :title } %>
         <%= list.errors.filter_map { |er| er.message if er.attribute == :title }.join(", ") %>

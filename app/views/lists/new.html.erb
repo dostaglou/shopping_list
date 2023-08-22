@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "new_list" do  %>
-  <dialog data-controller="dialog" data-dialog-target="dialog" class="dialog rounded-3xl">
+  <dialog data-controller="dialog" data-dialog-target="dialog" class="dialog rounded-3xl bg-transparent">
     <section data-action="click@window->dialog#outsideClick" data-dialog-target="modalBox" class="bg-transparent">
       <%= render partial: "lists/form", locals: { list: @list } %>
     </section>

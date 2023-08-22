@@ -2,9 +2,9 @@
   <div class="bg-slate-100 w-80 rounded-3xl p-4 border-slate-800 border-2 border-b-4 shadow-lg shadow-slate-400 hover:border-lime-500">
     <div class="">
       <div class="flex items-end my-2">
-        <%= form.text_field :name, placeholder: "Name", class: "border-transparent border-b-2 border-slate-400", required: true, maxlength: 20, minlength: 3  %>
+        <%= form.text_field :name, placeholder: "Name", class: "w-3/4 border-transparent border-b-2 border-slate-400", required: true, maxlength: 20, minlength: 3  %>
         <span class="px-2">Qty:</span>
-        <%= form.number_field :quantity, value: 1, in: (1..100), step: 1, class: "border-transparent border-b-2 border-slate-400", required: true %>
+        <%= form.select :quantity, ((1..100).map { |i| [i,i] }), class: "border-transparent border-b-2 border-slate-400", required: true %>
       </div>
       <%= form.text_field :note, placeholder: "Note", class: "w-full border-transparent border-b-2 border-slate-400", required: false, minlength: 3, maxlength: 80 %>
     </div>
