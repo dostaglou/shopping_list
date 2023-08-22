@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :set_list, only: %i[index new create update index]
-  before_action :update_list, only: [:delete]
+  before_action :set_list, only: %i[index new create edit update index]
+  before_action :set_item, only: %i[edit update destroy update_status]
 
   def index
     items = case params[:order]
@@ -9,8 +9,6 @@ class ItemsController < ApplicationController
             when "pending_only" then @list.items.by_status.pending
             else @list.items.by_status
             end
-
-    puts "\n\n\n#{items.pluck(:name)}\n\n\n"
 
     respond_to do |format|
       format.turbo_stream do
@@ -41,12 +39,18 @@ class ItemsController < ApplicationController
   end
 
   def update
+    if @item.update(item_params)
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to lists_path }
+      end
+    else
+      redirect_to lists_path
+    end
   end
 
   def update_status
-    item = Item.find(params[:id])
-
-    if item.update(status: params[:status].to_i)
+    if @item.update(status: params[:status].to_i)
       respond_to do |format|
         format.turbo_stream
         format.html { redirect_to lists_path }
@@ -69,6 +73,9 @@ class ItemsController < ApplicationController
   end
 
   private
+    def set_item
+      @item = Item.find(params[:id])
+    end
 
     def set_list
       @list = List.find(params[:list_id])

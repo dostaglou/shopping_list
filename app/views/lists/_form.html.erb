@@ -11,15 +11,17 @@
 
     <div class="mt-2 col-span-12 flex justify-around">
       <% if list.id %>
-        <%= link_to "Delete", list_path(list),
-          class: "text-center grow leading-8 align-middle my-0 ml-1 btn btn-warning",
+        <%= link_to list_path(list),
+          class: "text-center grow leading-8 align-middle my-0 ml-1 btn btn-critical",
           type: "button",
-          data: { turbo_method: :delete, action: "click->dialog#close" },
-          method: :delete
+          data: { turbo_method: :delete, action: "click->dialog#close", turbo_confirm: "Are you sure?" },
+          method: :delete do
         %>
+          <i class="fa-solid fa-trash"></i>
+        <% end %>
       <% end %>
-      <div data-action="click->dialog#close" class="text-center grow leading-8 align-middle my-0 ml-1 btn btn-warning">Cancel</div>
-      <button class="text-center grow my-0 ml-1 btn btn-primary">Submit</button>
+      <div data-action="click->dialog#close" class="text-center grow leading-8 align-middle my-0 ml-1 btn btn-warning"><i class="fa-solid fa-ban"></i></div>
+      <button class="text-center grow my-0 ml-1 btn btn-primary"><i class="fa-solid fa-check"></i></button>
     </div>
   </div>
   <% if list.errors.any? %>

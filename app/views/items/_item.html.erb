@@ -15,19 +15,21 @@
     data-transition-leave-end="opacity-0"
     class="<%= card_color %> rounded-3xl p-1 mt-1 ml-6 grid grid-cols-12 border-slate-800 border-2 shadow-lg shadow-slate-400 hover:border-lime-500">
 
-    <%= link_to item_path(item),  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, method: :delete do %>
-      <span class="col-span-1 my-auto pl-2"><i class="fa-solid fa-trash"></i></span>
+    <%= link_to item_path(item),  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, method: :delete, class: "col-span-1 text-center" do %>
+      <i class="fa-solid fa-trash"></i>
     <% end %>
-    <span class="col-span-7"><b><%= item.name %></b></span>
-    <span class="my-auto text-center col-span-3"><b><%= item.quantity %></b></span>
-    <% if item.pending? %>
-      <%= button_to item_update_status_path(id: item.id, status: Item.statuses[:retrieved]) do  %>
-        <span class="my-auto text-center col-span-1"><i class="text-pink-400 fa-regular fa-square"></i></span>
-      <% end %>
-    <% else %>
-      <%= button_to item_update_status_path(id: item.id, status: Item.statuses[:pending]) do  %>
-        <span class="my-auto text-center col-span-1"><i class="text-emerald-400 fa-regular fa-square-check"></i></span>
-      <% end %>
+    <span class="my-auto text-center col-span-1"><b><%= item.quantity %></b></span>
+    <%= link_to edit_list_item_path(list_id: item.list_id, id: item.id), data: { turbo_frame: "edit_item" }, class: "col-span-8 w-full" do %>
+      <b><%= item.name %></b>
     <% end %>
+      <% if item.pending? %>
+        <%= link_to item_update_status_path(id: item.id, list_id: item.list_id, status: Item.statuses[:retrieved]), method: :post, data: { turbo_method: :post }, class: "col-span-2 w-full text-center" do  %>
+          <span class=""><i class="text-pink-400 fa-regular fa-square"></i></span>
+        <% end %>
+      <% else %>
+        <%= link_to item_update_status_path(id: item.id, list_id: item.list_id, status: Item.statuses[:pending]), method: :post, data: { turbo_method: :post }, class: "col-span-2 w-full text-center" do  %>
+          <span class=""><i class="text-emerald-400 fa-regular fa-square-check"></i></span>
+        <% end %>
+      <% end %>
   </div>
 <% end %>
