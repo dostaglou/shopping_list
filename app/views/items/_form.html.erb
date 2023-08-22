@@ -1,5 +1,5 @@
 <%= form_with(model: [list, item]) do |form| %>
-  <div class="bg-slate-100 w-96 rounded-3xl p-4 border-slate-800 border-2 border-b-4 shadow-lg shadow-slate-400 hover:border-lime-500">
+  <div class="bg-slate-100 w-80 rounded-3xl p-4 border-slate-800 border-2 border-b-4 shadow-lg shadow-slate-400 hover:border-lime-500">
     <div class="">
       <div class="flex items-end my-2">
         <%= form.text_field :name, placeholder: "Name", class: "border-transparent border-b-2 border-slate-400", required: true, maxlength: 20, minlength: 3  %>
