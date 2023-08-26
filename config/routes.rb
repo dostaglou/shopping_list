@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :items, except: [:destroy]
   end
 
+  resources :friendships
   resources :items, only: [:destroy]
 
   post '/items/:id/update_status', to: "items#update_status", as: "item_update_status"

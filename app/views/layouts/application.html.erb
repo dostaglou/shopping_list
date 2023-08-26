@@ -18,11 +18,6 @@
   <body>
     <main class="container mx-auto">
       <%= render "layouts/navbar" %>
-      <% if flash[:errors] %>
-        <p class="error-flash">
-          <%= flash[:errors] %>
-        </p>
-      <% end %>
       <%= turbo_frame_tag "account" %>
       <%= yield %>
     </main>
