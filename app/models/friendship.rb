@@ -22,8 +22,11 @@
 #
 class Friendship < ApplicationRecord
   attr_accessor :name
+  before_create -> { self.invited_email = self.invited_email.strip },
+                if: -> { self.will_save_change_to_invited_email? }
 
   after_create_commit :set_invited_and_invite
+
   belongs_to :inviter, class_name: :User, foreign_key: :inviter_id
   belongs_to :invited, class_name: :User, foreign_key: :invited_id, optional: true
   validates :invited_email, presence: true
@@ -49,7 +52,7 @@ class Friendship < ApplicationRecord
         UserMailer.new_user_invitation(name, self.id).deliver_later
       else
         self.update(invited_id: user.id)
-        UserMailer.invitation(self.id)
+        UserMailer.invitation(self.id).deliver_later
       end
     end
 end

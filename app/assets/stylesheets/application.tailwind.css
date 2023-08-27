@@ -37,6 +37,9 @@
   .dialog {
     @apply backdrop:bg-slate-100 backdrop:opacity-90
   }
+  .input {
+    @apply border-transparent border-b-2 border-b-slate-400 focus:ring-0
+  }
 }
 
 .pagy-nav { @apply justify-center }

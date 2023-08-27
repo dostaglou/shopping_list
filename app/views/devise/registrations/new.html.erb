@@ -1,36 +1,39 @@
-<h2>Sign up</h2>
-
 <%= turbo_frame_tag "account" do  %>
   <dialog data-controller="dialog" data-dialog-target="dialog">
-    <section data-action="click@window->dialog#outsideClick" data-dialog-target="modalBox" class="p-4">
+    <section data-action="click@window->dialog#outsideClick" data-dialog-target="modalBox" class="p-4 w-80">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
 
-        <div class="field">
-          <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <div class="mt-2 w-full">
+          <%= f.text_field :username, autofocus: true, class: "input w-full", placeholder: "Name" %>
         </div>
 
-        <div class="field">
-          <%= f.label :password %>
+        <div class="mt-2 w-full">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input w-full", placeholder: "Email" %>
+        </div>
+
+        <div class="mt-2 w-full">
           <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> characters minimum)</em>
           <% end %><br />
-          <%= f.password_field :password, autocomplete: "new-password" %>
+          <%= f.password_field :password, autocomplete: "new-password", class: "input w-full", placeholder: "Password" %>
         </div>
 
-        <div class="field">
+        <div class="mt-2 w-full">
           <%= f.label :password_confirmation %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+          <%= f.password_field :password_confirmation, class: "input w-full", autocomplete: "new-password", placeholder: "Password Confirmation" %>
         </div>
 
-        <div class="flex justify-between w-full">
-          <div data-action="click->dialog#close" class="btn btn-warning grow">Close</div>
-          <%= f.submit "Sign up", class: "btn btn-primary grow", data: { turbo: false } %>
+        <div class="flex justify-between mt-2 w-full">
+          <div data-action="click->dialog#close" class="btn btn-warning text-center grow mx-2"><i class="fa-solid fa-ban"></i></div>
+          <button class="btn btn-primary grow mx-2">
+            <i class="fa-regular fa-paper-plane"></i>
+          </button>
         </div>
       <% end %>
+      <div class="mt-2 pt-2 border-t-2 border-t-slate-400">
+        <%= render "devise/shared/links" %>
+      </div>
     </section>
   </dialog>
 <% end %>
-
-<%= render "devise/shared/links" %>

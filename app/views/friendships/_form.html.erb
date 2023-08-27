@@ -1,10 +1,10 @@
 <%= form_with(model: friendship) do |form| %>
   <div class="bg-slate-100 mb-96 w-80 rounded-3xl p-4 border-slate-800 border-2 border-b-4 shadow-lg shadow-slate-400 hover:border-lime-500">
     <div class="w-11/12 mx-4">
-      <%= form.text_field :name, placeholder: :Name, class: "border_transparent border-b-2 border-slate-400 w-full", required: true, maxlength: 20, minlength: 3 %>
+      <%= form.text_field :name, placeholder: :Name, class: "border-transparent border-b-2 border-slate-400 w-full", required: true, maxlength: 20, minlength: 3 %>
     </div>
     <div class="w-11/12 mx-4 mt-2">
-      <%= form.email_field :invited_email, placeholder: :Email, class: "border_transparent border-b-2 border-slate-400 w-full", required: true, maxlength: 40, minlength: 3 %>
+      <%= form.email_field :invited_email, placeholder: :Email, class: "border-transparent border-b-2 border-slate-400 w-full", required: true, maxlength: 40, minlength: 3 %>
     </div>
     <div class="m-4">
       <%= form.fields_for :shared_lists do |shared_lists_form| %>
