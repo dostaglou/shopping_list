@@ -1,6 +1,9 @@
 class ListPolicy < ApplicationPolicy
   class Scope < Scope
     def user_scope
+      @scope = List.joins(:shared_lists)
+                    .where({ shared_lists: { status: 1 }})
+
       @scope.where({ lists: { user_id: @user.id }}).order(position: :asc)
     end
 

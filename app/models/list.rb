@@ -26,6 +26,8 @@ class List < ApplicationRecord
 
   belongs_to :user
   has_many :items, dependent: :destroy
+  has_many :shared_lists, dependent: :destroy
+  has_many :friendships, through: :shared_lists, source: :friendship
 
   validates :user_id, presence: true
   validates :title, length: { in: 3..20 }, presence: true, uniqueness: { scope: :user_id, case_sensitive: false }

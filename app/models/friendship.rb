@@ -44,6 +44,10 @@ class Friendship < ApplicationRecord
     rejected: 2
   }
 
+  def friend(current_user)
+    self.inviter_id == current_user.id ? self.invited : self.inviter
+  end
+
   private
 
     def set_invited_and_invite

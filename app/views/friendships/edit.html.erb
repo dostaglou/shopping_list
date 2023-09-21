@@ -1,4 +1,7 @@
-<div>
-  <h1 class="font-bold text-4xl">Friendship#edit</h1>
-  <p>Find me in app/views/friendship/edit.html.erb</p>
-</div>
+<%= turbo_frame_tag "friendship_modal" do  %>
+  <dialog data-controller="dialog" data-dialog-target="dialog" class="dialog rounded-3xl bg-transparent">
+    <section data-action="click@window->dialog#outsideClick" data-dialog-target="modalBox" class="bg-transparent">
+      <%= render partial: "friendships/form", locals: { friendship: @friendship, shared_list: @friendship.shared_lists.new } %>
+    </section>
+  </dialog>
+<% end %>

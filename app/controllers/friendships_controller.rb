@@ -1,8 +1,7 @@
 class FriendshipsController < ApplicationController
 
   def index
-    user_ids = Friendship.accepted.friendships_for(current_user.id).pluck(:inviter_id, :invited_id).flatten
-    @friends = User.where(id: user_ids).where.not(id: current_user.id)
+    @friendships = Friendship.accepted.friendships_for(current_user.id)
   end
 
   def invitations
@@ -41,7 +40,8 @@ class FriendshipsController < ApplicationController
   end
 
   def edit
-
+    @friendship = Friendship.find(params[:id])
+    puts "\n\n\nHERE\n\n\n"
   end
 
   def update
