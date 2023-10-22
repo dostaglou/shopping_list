@@ -10,6 +10,7 @@ export default class extends Controller {
       this.containerTarget.classList.remove("h-0");
       this.containerTarget.classList.remove("hidden");
     }
+    this.show()
   }
 
   show() {

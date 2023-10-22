@@ -35,7 +35,7 @@ class List < ApplicationRecord
   private
 
     def broadcast_creation
-      broadcast_prepend_to "user_#{self.user_id}_lists", partial: "lists/list", locals: { list: self, items: [] }, target: "user_#{self.user_id}_lists"
+      broadcast_prepend_to "user_#{self.user_id}_list_#{self.id}", partial: "lists/list", locals: { list: self, items: [] }, target: "user_#{self.user_id}_lists"
     end
 
     def broadcast_update

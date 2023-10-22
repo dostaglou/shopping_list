@@ -1,33 +1,31 @@
-<%= turbo_frame_tag "account" do  %>
-  <dialog data-controller="dialog" data-dialog-target="dialog">
-    <section data-action="click@window->dialog#outsideClick" data-dialog-target="modalBox" class="p-4 w-80">
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<dialog data-controller="dialog" data-dialog-target="dialog">
+  <section data-action="click@window->dialog#outsideClick" data-dialog-target="modalBox" class="p-4 w-80">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="mt-2 w-full">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input w-full", placeholder: "Email" %>
+      </div>
+
+      <div class="mt-2 w-full">
+        <%= f.password_field :password, autocomplete: "current-password", class: "input w-full", placeholder: "Password" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
         <div class="mt-2 w-full">
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input w-full", placeholder: "Email" %>
-        </div>
-
-        <div class="mt-2 w-full">
-          <%= f.password_field :password, autocomplete: "current-password", class: "input w-full", placeholder: "Password" %>
-        </div>
-
-        <% if devise_mapping.rememberable? %>
-          <div class="mt-2 w-full">
-            <%= f.check_box :remember_me %>
-            <%= f.label :remember_me %>
-          </div>
-        <% end %>
-
-        <div class="flex justify-between w-full mt-2">
-          <div data-action="click->dialog#close" class="btn btn-warning grow text-center"><i class="fa-solid fa-ban"></i></div>
-          <button class="btn btn-primary grow text-center">
-            <i class="fa-regular fa-paper-plane"></i>
-          </button>
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
         </div>
       <% end %>
-      <div class="mt-2 pt-2 border-t-2 border-t-slate-400">
-        <%= render "devise/shared/links" %>
+
+      <div class="flex justify-between w-full mt-2">
+        <div data-action="click->dialog#close" class="btn btn-warning grow text-center"><i class="fa-solid fa-ban"></i></div>
+        <button class="btn btn-primary grow text-center">
+          <i class="fa-regular fa-paper-plane"></i>
+        </button>
       </div>
-    </section>
-  </dialog>
-<% end %>
+    <% end %>
+    <div class="mt-2 pt-2 border-t-2 border-t-slate-400">
+      <%= render "devise/shared/links" %>
+    </div>
+  </section>
+</dialog>
 

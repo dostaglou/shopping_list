@@ -7,6 +7,10 @@ class ListsController < ApplicationController
     @total_pending_items = Item.pending.where(list_id: records.pluck(:id)).count
     @pagy, @lists = pagy(records, items: 10)
     @lists
+
+    respond_to do |format|
+      format.html { render :index }
+    end
   end
 
   def new
