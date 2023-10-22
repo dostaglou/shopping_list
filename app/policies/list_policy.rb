@@ -7,8 +7,6 @@ class ListPolicy < ApplicationPolicy
                      .or(@scope.where({ friendships: { invited_id: @user.id } }))
 
       @scope
-
-      # @scope.order("lists.position asc")
     end
 
     def visitor_scope # not logged in
