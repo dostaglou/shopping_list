@@ -4,19 +4,15 @@
 
 <section class="p-3 m-3">
   <div class="flex">
-    <%= link_to new_friendship_path, data: { turbo_frame: "friendship_modal" }, class: "btn btn-primary w-5/12 text-center" do  %>
-      <i class="fa-solid fa-list-check"></i>
-    <% end %>
-    <%= link_to new_friendship_path, data: { turbo_frame: "friendship_modal" }, class: "btn btn-primary w-5/12 text-center mx-4" do  %>
-      <i class="fa-solid fa-user-group"></i>
-    <% end %>
-    <%= link_to new_friendship_path, data: { turbo_frame: "friendship_modal" }, class: "btn btn-primary w-5/12 text-center" do  %>
-      <i class="fa-regular fa-paper-plane"></i>
+    <%= link_to new_friendship_path, data: { turbo_frame: "friend_modal" }, class: "btn btn-primary w-5/12 text-center" do  %>
+      Invite <i class="fa-regular fa-paper-plane"></i>
     <% end %>
   </div>
-  <%= turbo_frame_tag "user_#{current_user.id}_friends" do %>
-    <% @friendships.each do |friendship| %>
-      <%= render partial: "friendships/friendship", locals: { friendship: friendship } %>
+  <div>
+    <%= turbo_frame_tag "user_#{current_user.id}_friends" do %>
+      <% @friendships.each do |friendship| %>
+        <%= render partial: "friendships/friendship", locals: { friendship: friendship, user: current_user } %>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </section>

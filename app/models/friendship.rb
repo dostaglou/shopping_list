@@ -34,6 +34,7 @@ class Friendship < ApplicationRecord
   accepts_nested_attributes_for :shared_lists
 
   scope :friendships_for, -> (user_id) { where(inviter_id: user_id).or(where(invited_id: user_id)) }
+  scope :without_invited, -> { where(invited_id: nil) }
 
   validates :invited_email, uniqueness: { scope: :inviter_id, case_sensitive: false }
   validates :invited_id, uniqueness: { scope: :inviter_id }, allow_blank: true
@@ -44,14 +45,25 @@ class Friendship < ApplicationRecord
     rejected: 2
   }
 
+<<<<<<< HEAD
   def friend(current_user)
     self.inviter_id == current_user.id ? self.invited : self.inviter
+=======
+  def friend(current_user_id)
+    if current_user_id == self.invited_id
+      self.inviter
+    elsif self.invited.blank?
+      User.new(username: invited_email, email: invited_email)
+    else
+      self.invited
+    end
+>>>>>>> friendships
   end
 
   private
 
     def set_invited_and_invite
-      user = User.where("email ilike ?", self.invited_email).first
+      user = User.where("email ilike :email", { email: self.invited_email }).first
       if user.nil?
         UserMailer.new_user_invitation(name, self.id).deliver_later
       else

@@ -27,8 +27,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  after_create_commit :connect_invites
+
   has_many :lists, dependent: :destroy
   has_many :friendships, dependent: :destroy, class_name: :Friendship, foreign_key: :inviter_id
+<<<<<<< HEAD
   validates :username, presence: true, length: { in: 4..40 }
 
   private
@@ -36,5 +39,12 @@ class User < ApplicationRecord
     def link_friendships
       friendships = Friendship.pending.where(invited_id: nil).where(invited_email: self.email)
       friendships.update_all(updated_at: Time.now, invited_id: self.id)
+=======
+
+  private
+
+    def connect_invites
+      ConnectInvitesJob.perform_now(self.id)
+>>>>>>> friendships
     end
 end

@@ -1,21 +1,45 @@
 <%= form_with(model: friendship) do |form| %>
   <div class="bg-slate-100 mb-96 w-80 rounded-3xl p-4 border-slate-800 border-2 border-b-4 shadow-lg shadow-slate-400 hover:border-lime-500">
     <div class="w-11/12 mx-4">
-      <%= form.text_field :name, placeholder: :Name, class: "border-transparent border-b-2 border-slate-400 w-full", required: true, maxlength: 20, minlength: 3 %>
+      <% if friendship.persisted? %>
+        <span><%= friendship.friend(current_user.id).username %></span>
+      <% else %>
+        <%= form.text_field :name, placeholder: :Name, class: "border_transparent border-b-2 border-slate-400 w-full", required: true, maxlength: 40, minlength: 3 %>
+      <% end %>
     </div>
     <div class="w-11/12 mx-4 mt-2">
-      <%= form.email_field :invited_email, placeholder: :Email, class: "border-transparent border-b-2 border-slate-400 w-full", required: true, maxlength: 40, minlength: 3 %>
+      <% if friendship.persisted? %>
+        <span><%= friendship.friend(current_user.id).email %></span>
+      <% else %>
+        <%= form.email_field :invited_email, placeholder: :Email, class: "border_transparent border-b-2 border-slate-400 w-full", required: true, maxlength: 40, minlength: 3 %>
+      <% end %>
     </div>
     <div class="m-4">
-      <%= form.fields_for :shared_lists do |shared_lists_form| %>
-        <%= shared_lists_form.collection_check_boxes :list_id, current_user.lists, :id, :title, include_hidden: false do |b| %>
-          <p><%= b.check_box %> <%= b.text %></p>
+      <%= fields_for friendship.shared_lists.new do |sub_form| %>
+        <% shareable_lists.each do |list| %>
+          <div>
+            <% checked = friendship.shared_lists.any?{ |x| x.list_id == list.id } %>
+            <% shared_to_user = list.user_id != current_user.id %>
+            <% if shared_to_user %>
+              <%= sub_form.check_box(:list_id, { class: "text-slate-200", multiple: true, checked: checked, disabled: shared_to_user}, list.id, nil) %>
+              <span><i class="fa-solid fa-user-group"></i> <%= sub_form.label list.title %></span>
+            <% else %>
+              <%= sub_form.check_box(:list_id, { class: "", multiple: true, checked: checked}, list.id, nil) %>
+              <%= sub_form.label list.title %>
+            <% end %>
+          </div>
         <% end %>
       <% end %>
     </div>
     <div class="w-full flex">
-      <div data-action="click->dialog#close" class="grow mx-2 text-center leading-8 align-middle my-0 ml-1 btn btn-warning"><i class="fa-solid fa-ban"></i></div>
-      <button class="grow mx-2 btn btn-primary"><i class="fa-regular fa-paper-plane"></i></button>
+      <p data-action="click->dialog#close" class="grow mx-2 text-center leading-8 align-middle my-0 ml-1 btn btn-warning"><i class="fa-solid fa-ban"></i></p>
+      <% if friendship.persisted? %>
+        <% message = friendship.pending? ? "Reject Friendship?" : "End Friendship?" %>
+        <%= link_to friendship_path(friendship), method: :delete, data: { turbo_method: :delete, turbo_confirm: message } do %>
+          <p class="grow mx-2 text-center leading-8 align-middle my-0 btn btn-critical"><i class="fa-solid fa-trash"></i></p>
+        <% end %>
+      <% end %>
+      <button class="grow mx-2 btn btn-primary"><i class="fa-solid fa-check"></i></button>
     </div>
   </div>
 <% end %>
