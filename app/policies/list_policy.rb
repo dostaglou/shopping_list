@@ -1,10 +1,14 @@
 class ListPolicy < ApplicationPolicy
   class Scope < Scope
     def user_scope
-      @scope = List.joins(:shared_lists)
-                    .where({ shared_lists: { status: 1 }})
+      @scope = List.left_outer_joins(shared_lists: :friendship).order("lists.position asc")
+      @scope = @scope.where({lists: { user_id: @user.id } })
+                     .or(@scope.where({ friendships: { inviter_id: @user.id } }))
+                     .or(@scope.where({ friendships: { invited_id: @user.id } }))
 
-      @scope.where({ lists: { user_id: @user.id }}).order(position: :asc)
+      @scope
+
+      # @scope.order("lists.position asc")
     end
 
     def visitor_scope # not logged in

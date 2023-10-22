@@ -7,7 +7,7 @@
     <% end %>
     <span class="col-span-10"><%= friendship.friend(user.id).username %></span>
     <span class="col-span-1 text-center hover:text-lime-600">
-      <%= link_to edit_friendship_path(friendship.id), data: { turbo_frame: "friend_modal" } do  %>
+      <%= link_to edit_friendship_path(friendship.id), data: { turbo_frame: "friendship_modal" } do  %>
         <i class="fa-solid fa-pen-to-square"></i>
       <% end %>
     </span>
