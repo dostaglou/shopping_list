@@ -3,8 +3,8 @@
 <%= turbo_stream_from "user_#{current_user.id}_friends" %>
 
 <section class="p-3 m-3">
-  <div class="flex">
-    <%= link_to new_friendship_path, data: { turbo_frame: "friendship_modal" }, class: "btn btn-primary w-5/12 text-center" do  %>
+  <div class="flex justify-center text-center">
+    <%= link_to new_friendship_path, data: { turbo_frame: "friendship_modal" }, class: "btn btn-primary grow mx-3" do  %>
       Invite <i class="fa-regular fa-paper-plane"></i>
     <% end %>
   </div>

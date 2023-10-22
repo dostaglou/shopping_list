@@ -2,6 +2,9 @@
   <% if user_signed_in? %>
     <div class="flex justify-around"><h1><%= link_to "Our Basket", signed_in_root_path, class: "text-center text-xl ml-3 btn" %></h1></div>
     <div class="flex justify-between mx-2">
+      <%= link_to lists_path, class: "m-0 btn btn-primary" do %>
+        <i class="fa-solid fa-list-check"></i> Lists
+      <% end %>
       <%= link_to friendships_path, class: "m-0 btn btn-primary" do %>
         <i class="fa-solid fa-user-group"></i> Friends
       <% end %>
