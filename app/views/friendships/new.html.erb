@@ -1,7 +1,7 @@
 <%= turbo_frame_tag "friend_modal" do  %>
   <dialog data-controller="dialog" data-dialog-target="dialog" class="dialog rounded-3xl bg-transparent">
     <section data-action="click@window->dialog#outsideClick" data-dialog-target="modalBox" class="bg-transparent">
-      <%= render partial: "friendships/form", locals: { friendship: @friendship, shared_list: @friendship.shared_lists.new } %>
+      <%= render partial: "friendships/form", locals: { friendship: @friendship, shareable_lists: @shareable_lists } %>
     </section>
   </dialog>
 <% end %>

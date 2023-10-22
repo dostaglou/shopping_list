@@ -1,13 +1,15 @@
-<%= turbo_frame_tag "friend_#{friend.id}" do %>
+<%= turbo_frame_tag "friendship_#{friendship.id}" do %>
   <div class="bg-slate-100 rounded-3xl p-4 mt-6 grid grid-cols-12 border-slate-800 border-2 border-b-4 shadow-lg shadow-slate-400 hover:border-lime-500">
-    <%= link_to friendship_path(friend),  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, method: :delete, class: "text-center col-span-1" do %>
-      <i class="fa-solid fa-trash"></i>
+    <% if friendship.pending? %>
+      <span class="col-span-1"><i class="text-slate-400 fa-solid fa-pause"></i></span>
+    <% else %>
+      <span class="col-span-1"><i class="text-emerald-400 fa-regular fa-square-check"></i></span>
     <% end %>
-    <span class="col-span-10"><%= friend.username %></span>
+    <span class="col-span-10"><%= friendship.friend(user.id).username %></span>
     <span class="col-span-1 text-center hover:text-lime-600">
-      <%= link_to edit_friendship_path(friend.id), data: { turbo_frame: "edit_friendship" } do  %>
+      <%= link_to edit_friendship_path(friendship.id), data: { turbo_frame: "friend_modal" } do  %>
         <i class="fa-solid fa-pen-to-square"></i>
       <% end %>
     </span>
-  <div>
+  </div>
 <% end %>

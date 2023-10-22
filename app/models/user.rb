@@ -23,6 +23,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  after_create_commit :connect_invites
+
   has_many :lists, dependent: :destroy
-  has_many :friendships, dependent: :destroy, class_name: :friendship, class_name: :Friendship, foreign_key: :inviter_id
+  has_many :friendships, dependent: :destroy, class_name: :Friendship, foreign_key: :inviter_id
+
+  private
+
+    def connect_invites
+      ConnectInvitesJob.perform_now(self.id)
+    end
 end
