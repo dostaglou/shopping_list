@@ -45,10 +45,6 @@ class Friendship < ApplicationRecord
     rejected: 2
   }
 
-<<<<<<< HEAD
-  def friend(current_user)
-    self.inviter_id == current_user.id ? self.invited : self.inviter
-=======
   def friend(current_user_id)
     if current_user_id == self.invited_id
       self.inviter
@@ -57,7 +53,6 @@ class Friendship < ApplicationRecord
     else
       self.invited
     end
->>>>>>> friendships
   end
 
   private

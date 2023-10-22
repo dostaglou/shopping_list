@@ -1,10 +1,6 @@
 class FriendshipsController < ApplicationController
   def index
-<<<<<<< HEAD
-    @friendships = Friendship.accepted.friendships_for(current_user.id)
-=======
     @friendships = Friendship.friendships_for(current_user.id)
->>>>>>> friendships
   end
 
   def invitations
@@ -40,15 +36,10 @@ class FriendshipsController < ApplicationController
   end
 
   def edit
-<<<<<<< HEAD
-    @friendship = Friendship.find(params[:id])
-    puts "\n\n\nHERE\n\n\n"
-=======
     @friendship = Friendship.includes(:shared_lists).find(params[:id])
 
     list_ids = current_user.list_ids + @friendship.shared_lists.pluck(:list_id)
     @shareable_lists = List.where(id: current_user.list_ids + @friendship.shared_lists.pluck(:list_id))
->>>>>>> friendships
   end
 
   def update
