@@ -84,8 +84,6 @@ gem "pundit", "~> 2.3"
 
 gem "font-awesome-sass", "~> 6.4"
 
-gem "acts_as_list", "~> 1.1"
-
 gem "sendgrid-ruby", "~> 6.6"
 
 gem "letter_opener", "~> 1.8", :group => :development

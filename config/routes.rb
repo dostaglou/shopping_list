@@ -16,7 +16,6 @@ Rails.application.routes.draw do
     resources :items, only: [:destroy]
 
     post '/items/:id/update_status', to: "items#update_status", as: "item_update_status"
-    put '/lists/:id/update_position', to: 'lists#update_position', as: 'list_update_position'
     put '/friendships/:id/accept_friendship', to: 'friendships#accept_friendship', as: 'accept_friendship'
 
     root to: "lists#index", as: :signed_in_root

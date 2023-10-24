@@ -3,7 +3,6 @@
 # Table name: lists
 #
 #  id         :bigint           not null, primary key
-#  position   :integer          default(0), not null
 #  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

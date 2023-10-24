@@ -3,7 +3,6 @@
 # Table name: lists
 #
 #  id         :bigint           not null, primary key
-#  position   :integer          default(0), not null
 #  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -18,8 +17,6 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class List < ApplicationRecord
-  acts_as_list(top_of_list: 0, add_new_at: :top)
-
   after_create_commit :broadcast_creation
   after_update_commit :broadcast_update
   after_destroy_commit :broadcast_destroy
