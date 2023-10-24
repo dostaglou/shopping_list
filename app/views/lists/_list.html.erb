@@ -1,4 +1,5 @@
 <%= turbo_frame_tag "list_#{list.id}" do  %>
+  <div data-controller="slide" data-slide-expanded-value="<%= (defined?(expanded) || false).to_s %>">
     <div class="bg-slate-100 rounded-3xl p-4 mt-6 grid grid-cols-12 border-slate-800 border-2 border-b-4 shadow-lg shadow-slate-400 hover:border-lime-500">
       <span class="col-span-1">
         <% if list.shared_lists.exists? && user.id == list.user_id %>
@@ -13,10 +14,10 @@
       <%= link_to edit_list_path(list.id), data: { turbo_frame: "edit_list" }, class: "text-center col-span-1 hover:text-lime-600" do  %>
         <span class=""><i class="fa-solid fa-pen-to-square"></i></span>
       <% end %>
-      <span data-slide-target="showButton" data-action="click->slide#show" class="text-center col-span-2"><%= "#{list.items.pending.count}/#{list.items.count}" %> <i class="text-lime-400 fa-solid fa-eye"></i></span>
-      <span data-slide-target="hideButton" data-action="click->slide#hide" class="hidden text-center col-span-2"><%= "#{list.items.pending.count}/#{list.items.count}" %> <i class="text-red-400 fa-solid fa-eye-slash"></i></span>
+      <span data-slide-target="showButton" data-action="click->slide#show" class="hidden text-center col-span-2"><%= "#{list.items.pending.count}/#{list.items.count}" %> <i class="text-lime-400 fa-solid fa-eye"></i></span>
+      <span data-slide-target="hideButton" data-action="click->slide#hide" class="text-center col-span-2"><%= "#{list.items.pending.count}/#{list.items.count}" %> <i class="text-red-400 fa-solid fa-eye-slash"></i></span>
     </div>
-    <div data-slide-target="container" class="hidden h-0">
+    <div data-slide-target="container" class="">
       <div data-slide-target="section" data-transition-enter="ease-in-out duration-300" data-transition-enter-start="h-0 opacity-0" data-transition-enter-end="h-32 opacity-100" data-transition-leave="ease-in-out duration-1000" data-transition-leave-start="h-32 opacity-100" data-transition-leave-end="h-0 opacity-0">
         <div class="mr-6 text-right" data-slide-target="content" data-transition-enter="ease-in-out duration-1000" data-transition-enter-start="opacity-0" data-transition-enter-end="opacity-100" data-transition-leave="ease-in-out duration-300" data-transition-leave-start="opacity-100" data-transition-leave-end="opacity-0">
           <%= link_to "New", new_list_item_path(list_id: list.id), data: { turbo_frame: "new_item" }, class: "btn btn-primary mt-0 rounded-t-none" %>
@@ -37,5 +38,6 @@
         <% end %>
       </div>
     </div>
+  </div>
 <% end %>
 

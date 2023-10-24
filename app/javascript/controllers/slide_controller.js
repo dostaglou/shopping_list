@@ -5,13 +5,7 @@ export default class extends Controller {
   static values = { expanded: Boolean };
   static targets = ["container", "section", "content", "hideButton", "showButton" ];
 
-  connect() {
-    if (this.expandedValue) {
-      this.containerTarget.classList.remove("h-0");
-      this.containerTarget.classList.remove("hidden");
-    }
-    this.show()
-  }
+  connect() {}
 
   show() {
     this.containerTarget.classList.remove("h-0");
