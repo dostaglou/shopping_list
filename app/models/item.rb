@@ -20,7 +20,6 @@ class Item < ApplicationRecord
 
   after_create_commit :broadcast_creation
   after_update_commit :broadcast_update
-  after_destroy_commit :broadcast_destroy
 
   validates :status, presence: true
   validates :name, presence: true, length: { in: 3..20 }
@@ -37,18 +36,26 @@ class Item < ApplicationRecord
 
   validates :name, length: { in: 3..20 }, presence: true, uniqueness: { scope: :list_id, case_sensitive: false }
 
+  def shared_users
+    User.where(id: self.list.friendships.pluck(:invited_id, :inviter_id).flatten).excluding(self.list.user)
+  end
+
   private
 
     def broadcast_creation
       top_item = "#{self.list_id}_top_item"
+      self.shared_users.each do |target_user|
+        broadcast_after_to "user_#{target_user.id}_lists", partial: "items/item", locals: { item: self }, target: top_item
+      end
+
       broadcast_after_to "user_#{self.list.user_id}_lists", partial: "items/item", locals: { item: self }, target: top_item
     end
 
     def broadcast_update
-      broadcast_replace_to "user_#{self.list.user_id}_lists", partial: "items/item", locals: { item: self }, target: "item_#{self.id}"
-    end
+      self.shared_users.each do |target_user|
+        broadcast_replace_to "user_#{target_user.id}_lists", partial: "items/item", locals: { item: self }, target: "item_#{self.id}"
+      end
 
-    def broadcast_destroy
-      broadcast_remove_to "user_#{self.list.user_id}_lists", target: "item_#{self.id}"
+      broadcast_replace_to "user_#{self.list.user_id}_lists", partial: "items/item", locals: { item: self }, target: "item_#{self.id}"
     end
 end

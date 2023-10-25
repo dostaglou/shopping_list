@@ -12,7 +12,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.replace("list_#{@list.id}", partial: "lists/list", locals: { list: @list, items: items, expanded: true })
+        render turbo_stream: turbo_stream.replace("list_#{@list.id}", partial: "lists/list", locals: { list: @list, items: items, user: current_user, expanded: true })
       end
       format.html { redirect_to @list }
     end
@@ -61,8 +61,11 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    item = Item.find(params[:id])
-    if item.destroy
+    @item = Item.find(params[:id])
+    shared_users = @item.shared_users
+
+    if @item.destroy
+      self.broadcast_destroy(shared_users)
       respond_to do |format|
         format.turbo_stream
         format.html { redirect_to lists_path }
@@ -83,5 +86,12 @@ class ItemsController < ApplicationController
 
     def item_params
       params.require(:item).permit(:name, :note, :quantity)
+    end
+
+    def broadcast_destroy(shared_users)
+      shared_users.each do |target_user|
+       @item.broadcast_remove_to "user_#{target_user.id}_lists", target: "item_#{@item.id}"
+      end
+      @item.broadcast_remove_to "user_#{@item.list.user_id}_lists", target: "item_#{@item.id}"
     end
 end

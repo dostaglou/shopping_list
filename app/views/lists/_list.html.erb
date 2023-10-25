@@ -10,12 +10,16 @@
           <i class="fa-solid fa-user text-emerald-400"></i>
         <% end %>
       </span>
-      <span class="col-span-8"><b><%= list.title %></b></span>
-      <%= link_to edit_list_path(list.id), data: { turbo_frame: "edit_list" }, class: "text-center col-span-1 hover:text-lime-600" do  %>
-        <span class=""><i class="fa-solid fa-pen-to-square"></i></span>
+      <span class="col-span-7"><b><%= list.title %></b></span>
+      <% if list.user_id == user.id %>
+        <%= link_to edit_list_path(list.id), data: { turbo_frame: "edit_list" }, class: "text-center col-span-1 hover:text-lime-600" do  %>
+          <span class=""><i class="fa-solid fa-pen-to-square"></i></span>
+        <% end %>
+      <% else %>
+        <div class="text-center col-span-1 hover:text-lime-600"></div>
       <% end %>
-      <span data-slide-target="showButton" data-action="click->slide#show" class="hidden text-center col-span-2"><%= "#{list.items.pending.count}/#{list.items.count}" %> <i class="text-lime-400 fa-solid fa-eye"></i></span>
-      <span data-slide-target="hideButton" data-action="click->slide#hide" class="text-center col-span-2"><%= "#{list.items.pending.count}/#{list.items.count}" %> <i class="text-red-400 fa-solid fa-eye-slash"></i></span>
+      <span data-slide-target="showButton" data-action="click->slide#show" class="hidden text-center col-span-3"><%= "#{list.items.pending.count}/#{list.items.count}" %> <i class="text-lime-400 fa-solid fa-eye"></i></span>
+      <span data-slide-target="hideButton" data-action="click->slide#hide" class="text-center col-span-3"><%= "#{list.items.pending.count}/#{list.items.count}" %> <i class="text-red-400 fa-solid fa-eye-slash"></i></span>
     </div>
     <div data-slide-target="container" class="">
       <div data-slide-target="section" data-transition-enter="ease-in-out duration-300" data-transition-enter-start="h-0 opacity-0" data-transition-enter-end="h-32 opacity-100" data-transition-leave="ease-in-out duration-1000" data-transition-leave-start="h-32 opacity-100" data-transition-leave-end="h-0 opacity-0">

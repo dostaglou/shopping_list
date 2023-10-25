@@ -44,7 +44,9 @@ class ListsController < ApplicationController
   end
 
   def destroy
+    shared_users = @list.shared_users
     if @list.destroy
+      broadcast_destroy(shared_users)
       respond_to do |format|
         format.turbo_stream
         format.html { redirect_to lists_path }
@@ -67,5 +69,13 @@ class ListsController < ApplicationController
 
     def list_params
       params.require(:list).permit(:title, :position)
+    end
+
+    def broadcast_destroy(shared_users)
+      shared_users.each do |target_user|
+        @list.broadcast_remove_to "user_#{target_user.id}_lists", target: @list
+      end
+
+      @list.broadcast_remove_to "user_#{@list.user_id}_lists", target: @list
     end
 end

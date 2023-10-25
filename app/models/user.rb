@@ -30,7 +30,8 @@ class User < ApplicationRecord
   after_create_commit :connect_invites
 
   has_many :lists, dependent: :destroy
-  has_many :friendships, dependent: :destroy, class_name: :Friendship, foreign_key: :inviter_id
+  has_many :invites, dependent: :destroy, class_name: :Friendship, foreign_key: :inviter_id
+  has_many :inviteds, dependent: :destroy, class_name: :Friendship, foreign_key: :invited_id
   validates :username, presence: true, length: { in: 4..40 }
 
   private
